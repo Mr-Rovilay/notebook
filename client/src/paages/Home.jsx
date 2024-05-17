@@ -8,7 +8,7 @@ import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import BooksTable from "../components/home/BooksTable";
 import BooksCard from "../components/home/BooksCard";
 
-export const url = "https://notebook-9ug5.onrender.com";
+export const url = "https://notebook-server-4wgq.onrender.com";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
