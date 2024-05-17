@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
-import { url } from "./Home";
 
 const EditBook = () => {
   const [title, setTitle] = useState("");
@@ -17,7 +16,7 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(url + `/books/${id}`)
+      .get(import.meta.env.SERVER_DOMAIN + `/books/${id}`)
       .then((response) => {
         setAuthor(response.data.author);
         setPublishYear(response.data.publishYear);
