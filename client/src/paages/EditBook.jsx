@@ -17,33 +17,38 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${url}/books/${id}`)
+      .get(url + `/books/${id}`)
       .then((response) => {
-        const { title, author, publishYear, note } = response.data;
-        setTitle(title);
-        setAuthor(author);
-        setPublishYear(publishYear);
-        setNote(note);
+        setAuthor(response.data.author);
+        setPublishYear(response.data.publishYear);
+        setTitle(response.data.title);
+        setNote(response.data.note);
         setLoading(false);
       })
       .catch((error) => {
         setLoading(false);
-        alert("An error occurred. Please check console");
-        console.error(error);
+        alert("An error happened. Please Chack console");
+        console.log(error);
       });
-  }, [id]);
+  }, []);
 
   const handleEditBook = () => {
-    const data = { title, author, publishYear, note };
+    const data = {
+      title,
+      author,
+      publishYear,
+      note,
+    };
+    setLoading(true);
     axios
-      .put(`${url}/books/${id}`, data)
+      .put(url + `/books/${id}`, data)
       .then(() => {
-        setLoading(true);
+        setLoading(false);
         navigate("/");
       })
       .catch((error) => {
         setLoading(false);
-        console.error(error);
+        console.log(error);
       });
   };
 
@@ -51,8 +56,8 @@ const EditBook = () => {
     <div className="p-4">
       <BackButton />
       <h1 className="text-3xl my-4">Edit Book</h1>
-      {loading && <Spinner />}
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-full max-w-xl p-4 mx-auto">
+      {loading ? <Spinner /> : ""}
+      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Title</label>
           <input
@@ -68,7 +73,7 @@ const EditBook = () => {
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="border-2 border-gray-500 px-4 py-2  w-full "
           />
         </div>
         <div className="my-4">
@@ -77,23 +82,22 @@ const EditBook = () => {
             type="number"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="border-2 border-gray-500 px-4 py-2  w-full "
           />
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Note</label>
           <textarea
+            name=""
+            id=""
+            type="text"
             value={note}
-            onChange={(e) => setNote(e.target.value)}
-            className="border-2 border-gray-500 px-4 p"
+            onChange={(e) => setPublishYear(e.target.value)}
+            className=""
           ></textarea>
         </div>
-        <button
-          className="p-2 bg-sky-300 m-8 disabled:bg-gray-300"
-          onClick={handleEditBook}
-          disabled={loading}
-        >
-          {loading ? "Saving..." : "Save"}
+        <button className="p-2 bg-sky-300 m-8" onClick={handleEditBook}>
+          Save
         </button>
       </div>
     </div>

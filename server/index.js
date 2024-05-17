@@ -93,13 +93,18 @@ app.put("/books/:id", async (req, res) => {
       return res.status(400).json({ message: "id is required" });
     }
     // send result desturcture the id
-    const result = await bookSchema.findByIdAndUpdate({ _id: id });
+    const result = await Todo.findByIdAndUpdate(id, {
+      title: title,
+      author: author,
+      publishYear: publishYear,
+      note: note,
+    });
 
     if (!result) {
       return res.status(404).json({ message: "Not found" });
     }
-    //send result which is lso 200
-    return res.status(200).send({ message: "Book updated successfully" });
+    await result.save();
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
