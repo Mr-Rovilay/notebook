@@ -7,7 +7,6 @@ import BooksTable from "../components/home/BooksTable";
 import BooksCard from "../components/home/BooksCard";
 
 export const url = import.meta.env.VITE_SERVER_DOMAIN;
-console.log(url);
 
 const Home = () => {
   const [books, setBooks] = useState([]);

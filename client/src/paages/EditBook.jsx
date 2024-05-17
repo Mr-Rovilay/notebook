@@ -35,11 +35,10 @@ const EditBook = () => {
 
   const handleEditBook = () => {
     const data = { title, author, publishYear, note };
-    setLoading(true);
     axios
       .put(`${url}/books/${id}`, data)
       .then(() => {
-        setLoading(false);
+        setLoading(true);
         navigate("/");
       })
       .catch((error) => {
@@ -86,7 +85,7 @@ const EditBook = () => {
           <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="border-2 border-gray-500 px-4 p"
           ></textarea>
         </div>
         <button
