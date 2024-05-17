@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
+import { url } from "./Home";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,7 +24,7 @@ const CreateBooks = () => {
     };
     setLoading(true);
     axios
-      .post(import.meta.env.VITE_SERVER_DOMAIN + "/books", data)
+      .post(url + "/books", data)
       .then(() => {
         setLoading(false);
         toast.success("Book created successfully!");

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { url } from "./Home";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
@@ -12,7 +13,7 @@ const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(import.meta.env.SERVER_DOMAIN + `/books/${id}`)
+      .delete(url + `/books/${id}`)
       .then(() => {
         setLoading(false);
         navigate("/");

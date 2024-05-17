@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+
+import { url } from "./Home";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
@@ -12,7 +14,7 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(import.meta.env.SERVER_DOMAIN + `/${id}`)
+      .get(url + `/books/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
