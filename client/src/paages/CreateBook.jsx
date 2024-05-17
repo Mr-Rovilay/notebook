@@ -24,7 +24,7 @@ const CreateBooks = () => {
     };
     setLoading(true);
     axios
-      .post(url, data)
+      .post(url + "/books", data)
       .then(() => {
         setLoading(false);
         toast.success("Book created successfully!");
