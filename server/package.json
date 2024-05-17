@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "lint": "npx eslint",
-    "lint:fix": "npx eslint --fix",
-    "start": "npm run build && node ./build/index.js",
+    "dev": "nodemon server/index.js",
+    "start": "nodemon node server/index.js",
+    "build": "npm install && npm install",
     "clean": "rm -rf build && mkdir build"
   },
   "keywords": [],
