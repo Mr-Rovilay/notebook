@@ -14,16 +14,16 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(url + `/books/${id}`)
+      .get(`${url}/books/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div className="p-4">
@@ -32,33 +32,35 @@ const ShowBook = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Id</span>
+        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-full max-w-xl p-4 mx-auto">
+          <div className="my-2">
+            <span className="text-xl mr-2 text-gray-500">Id:</span>
             <span>{book._id}</span>
           </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Title</span>
+          <div className="my-2">
+            <span className="text-xl mr-2 text-gray-500">Title:</span>
             <span>{book.title}</span>
           </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Author</span>
+          <div className="my-2">
+            <span className="text-xl mr-2 text-gray-500">Author:</span>
             <span>{book.author}</span>
           </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Publish Year</span>
+          <div className="my-2">
+            <span className="text-xl mr-2 text-gray-500">Publish Year:</span>
             <span>{book.publishYear}</span>
           </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Note</span>
+          <div className="my-2">
+            <span className="text-xl mr-2 text-gray-500">Note:</span>
             <span>{book.note}</span>
           </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Create Time</span>
+          <div className="my-2">
+            <span className="text-xl mr-2 text-gray-500">Create Time:</span>
             <span>{new Date(book.createdAt).toString()}</span>
           </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
+          <div className="my-2">
+            <span className="text-xl mr-2 text-gray-500">
+              Last Update Time:
+            </span>
             <span>{new Date(book.updatedAt).toString()}</span>
           </div>
         </div>

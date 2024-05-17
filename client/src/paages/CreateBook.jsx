@@ -16,15 +16,16 @@ const CreateBooks = () => {
   const navigate = useNavigate();
 
   const handleSaveBook = () => {
-    const data = {
-      title,
-      author,
-      publishYear,
-      note,
-    };
+    if (!title || !author || !publishYear || !note) {
+      toast.error("All fields are required.");
+      return;
+    }
+
+    const data = { title, author, publishYear, note };
     setLoading(true);
+
     axios
-      .post(url + "/books", data)
+      .post(`${url}/books`, data)
       .then(() => {
         setLoading(false);
         toast.success("Book created successfully!");
@@ -32,7 +33,7 @@ const CreateBooks = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
+        console.error(error);
         toast.error("Error creating book. Please try again.");
       });
   };
@@ -41,8 +42,8 @@ const CreateBooks = () => {
     <div className="p-4">
       <BackButton />
       <h1 className="text-3xl my-4">Create Book</h1>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+      {loading && <Spinner />}
+      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-full max-w-xl p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Title</label>
           <input
@@ -58,7 +59,7 @@ const CreateBooks = () => {
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
+            className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
         <div className="my-4">
@@ -67,22 +68,23 @@ const CreateBooks = () => {
             type="number"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
+            className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Note</label>
           <textarea
-            name=""
-            id=""
-            type="text"
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
+            className="border-2 border-gray-500 px-4 py-2 w-full"
           ></textarea>
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveBook}>
-          Save
+        <button
+          className="p-2 bg-sky-300 m-8 disabled:bg-gray-300"
+          onClick={handleSaveBook}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save"}
         </button>
       </div>
       <ToastContainer />

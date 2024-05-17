@@ -7,7 +7,7 @@ import bookSchema from "./models/bookSchema.js";
 const app = express();
 
 const corsOptions = {
-  origin: "https://notebook-bcjv.onrender.com",
+  origin: "*", // Allow only this origin
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
