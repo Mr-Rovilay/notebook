@@ -37,13 +37,11 @@ app.get("/books", async (req, res) => {
 app.post("/books", async (req, res) => {
   try {
     //validate first
-    // const currentYear = new Date().getFullYear();
-    // const inputYear = req.body.publishYear;
-    // if (inputYear > currentYear) {
-    //   return res
-    //     .status(400)
-    //     .send({ message: "Year should not be more than the current year." });
-    // }
+    const currentYear = new Date().getFullYear();
+    const inputYear = req.body.publishYear;
+    if (inputYear > currentYear) {
+      return res.status(400).send({ message: "Year should  year." });
+    }
     if (
       !req.body.title ||
       !req.body.author ||
