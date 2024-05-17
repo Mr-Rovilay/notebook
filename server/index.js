@@ -6,7 +6,15 @@ import bookSchema from "./models/bookSchema.js";
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://notebook-bcjv.onrender.com",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
