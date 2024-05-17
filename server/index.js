@@ -42,7 +42,7 @@ app.post("/books", async (req, res) => {
     if (inputYear > currentYear) {
       return res
         .status(400)
-        .json({ error: "Year should not be more than the current year." });
+        .send({ message: "Year should not be more than the current year." });
     }
     if (
       !req.body.title ||
