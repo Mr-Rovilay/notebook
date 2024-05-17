@@ -37,6 +37,13 @@ app.get("/books", async (req, res) => {
 app.post("/books", async (req, res) => {
   try {
     //validate first
+    const currentYear = new Date().getFullYear();
+    const inputYear = req.body.publishYear;
+    if (inputYear > currentYear) {
+      return res
+        .status(400)
+        .json({ error: "Year should not be more than the current year." });
+    }
     if (
       !req.body.title ||
       !req.body.author ||
