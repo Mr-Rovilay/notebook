@@ -14,10 +14,23 @@ const CreateBooks = () => {
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const currentYear = new Date().getFullYear();
+
+  function validateYear(inputYear) {
+    if (inputYear > currentYear) {
+      toast.error("Year should not be more than the current year.");
+      return false;
+    }
+    return true;
+  }
 
   const handleSaveBook = () => {
     if (!title || !author || !publishYear || !note) {
       toast.error("All fields are required.");
+      return;
+    }
+
+    if (!validateYear(publishYear)) {
       return;
     }
 
