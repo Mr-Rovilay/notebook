@@ -24,7 +24,7 @@ const CreateBooks = () => {
     return true;
   }
 
-  const handleSaveBook = () => {
+  const handleSaveBook = async () => {
     if (!title || !author || !publishYear || !note) {
       toast.error("All fields are required.");
       return;
@@ -37,18 +37,16 @@ const CreateBooks = () => {
     const data = { title, author, publishYear, note };
     setLoading(true);
 
-    axios
-      .post(`${url}/books`, data)
-      .then(() => {
-        setLoading(false);
-        toast.success("Book created successfully!");
-        navigate("/");
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.error(error);
-        toast.error("Error creating book. Please try again.");
-      });
+    try {
+      await axios.post(`${url}/books`, data);
+      setLoading(false);
+      toast.success("Book created successfully!");
+      navigate("/");
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      toast.error("Error creating book. Please try again.");
+    }
   };
 
   return (

@@ -86,15 +86,14 @@ app.get("/books/:id", async (req, res) => {
 
 //update
 app.put("/books/:id", async (req, res) => {
-  const currentYear = new Date().getFullYear();
-  const inputYear = req.body.publishYear;
-  if (inputYear > currentYear) {
-    return res
-      .status(400)
-      .send({ message: "Year should not be more than the current year." });
-  }
-
   try {
+    const currentYear = new Date().getFullYear();
+    const inputYear = req.body.publishYear;
+    if (inputYear > currentYear) {
+      return res
+        .status(400)
+        .send({ message: "Year should not be more than the current year." });
+    }
     if (
       !req.body.title ||
       !req.body.author ||
